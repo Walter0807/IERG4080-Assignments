@@ -1,0 +1,7 @@
+data
+model
+output
+*.pyc
+cache
+.ipynb_checkpoints
+aclImdb
