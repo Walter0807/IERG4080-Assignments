@@ -16,22 +16,15 @@ def find_url(text):
     return urls
 
 def handle(msg):
-    # print('Hello from Thread 1')
     """
     A function that will be invoked when a message is
     recevied by the bot
     """
     content_type, chat_type, chat_id = telepot.glance(msg)
-    # output_queue = Queue()
     r = StrictRedis(host='localhost', port=6379)
     threading.Thread(target=reply_thread, args=(r, bot)).start()
     if content_type == "text":
-
-        # import wget
         content = msg["text"]
-        # filename = wget.download(content)
-        # image = Image.open(filename)
-        
         url_list = find_url(content)
         if url_list!=[]:
             url = find_url(content)[0]
@@ -44,7 +37,6 @@ def handle(msg):
         message = json.dumps(data)
         r.rpush('download', message.encode("utf-8"))
 
-    # output_queue.put([chat_id, image])
     
     
 
@@ -73,13 +65,9 @@ def send_message(reply_queue):
         
 
 if __name__ == "__main__":
-    
-    # Load Model
-    # [vectorizer,logis] = joblib.load('model.pkl')
 
     # Provide your bot's token
     bot = telepot.Bot("735092509:AAHMWTa-ZCK8npB5r4FnvMfHW7wTsYLHwAo")
     MessageLoop(bot, handle).run_as_thread()
-    # t2 = Thread(target=client_thread)
     while True:
         time.sleep(10)

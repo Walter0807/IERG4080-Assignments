@@ -12,6 +12,7 @@ bot = telepot.Bot("735092509:AAHMWTa-ZCK8npB5r4FnvMfHW7wTsYLHwAo")
 while True:
     item = json.loads(r.blpop('download')[1].decode('utf-8'))
     # print(item)
+    print('An item received')
     chat_id = item['chat_id']
     if 'file_id' in item:
         bot.download_file(item['file_id'], 'file.png')

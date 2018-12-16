@@ -67,6 +67,7 @@ labels = json.loads(content)
 while True:
 	
     item = json.loads(r.blpop('image')[1].decode('utf-8'))
+    print('An item received')
     chat_id = item['chat_id']
     image_data = base64.b64decode(item['image'])
     img_path = 'predict.png'
